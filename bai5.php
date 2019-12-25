@@ -1,22 +1,34 @@
 <?php
-	$array;
-	function findNumbers($str = '', $pos) {
-		$new_pos = $pos++;
-		while (ord($str[$new_pos]) > 47 && ord($str[$new_pos]) < 58) {
-			$new_pos++;
-		}
-		return $new_pos;
-	}
-	function numberInString($str = '') {
-		for ($i=0; $i < strlen($str); $i++) { 
-			if (ord($str[$i]) > 47 && ord($str[$i]) < 58) {
-				$new_pos = findNumbers($str,$i);		
-				$strnew = substr($str, $i-1, -(strlen($str) - $new_pos));
-				array_push($array, $strnew);
-				$i = $new_pos-1;
-			}
+function findNumber($str = '',$pos)
+{
+	$number = "";
+	for ($i=$pos; $i < strlen($str); $i++) { 
+		if (ord($str[$i]) > 47
+			&& ord($str[$i]) <58) {
+				$number .= $str[$i];
+		} else {
+			break;
 		}
 	}
-	$str = '23sgs32fe';
-	numberInString($str);
-	var_dump($array);
+	return $number;
+}
+function numberInString($str = '')
+{
+	$number = "-1";
+	for ($i=0; $i < strlen($str); $i++) { 
+		if (ord($str[$i]) > 47
+			&& ord($str[$i]) < 58) {
+				if ((int)(findNumber($str, $i)) > (int)($number)) {
+					$number = findNumber($str, $i);
+				}
+		}
+	}
+	if ($number == "-1") {
+		return "No Number !";
+	} else {
+		return $number;
+	}
+}
+
+echo (numberInString("541as999faf2150"));
+

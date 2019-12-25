@@ -1,16 +1,15 @@
 <?php  
-    function longestWord($word = ''){
+function longestWord($word = '')
+{
+    $arr = str_word_count($word,1); 
+    $result = $arr[0];
+    for ($i=1; $i < sizeof($arr); $i++) { 
+        if (strlen($arr[$i]) > strlen($result)) {
+            $result = $arr[$i];
+        }
+    }
+    return $result;
+}
 
-        $word = explode(" ",$word);
-        $max=0;
-        for ($i=0; $i < sizeof($word); $i++){ 
-        	if(strlen($word[$i]) > $max){
-        		$max = strlen($word[$i]);
-        	}
-        }
-        for ($i=0; $i < sizeof($word); $i++){ 
-        	if(strlen($word[$i]) == $max){
-        		return $word[$i];
-        	}
-        }
-	}
+echo longestWord("alo blo.xelo afsavav.fafsafsafsaf");
+
